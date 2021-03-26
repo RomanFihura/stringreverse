@@ -1,35 +1,26 @@
-#include <iostream>
-#include <cmath>
-#include <cstring>
+#include <vector>
 #include <string>
-#include <cstdlib>
-#include <assert.h>
-#include <algorithm>
-void reverse(std::string &name,int a,int b);
+#include <sstream>
+#include <iostream>
+
 int main()
 {
- std::string str , str2 = " ";
- std::cout << "Input your line: " ;
- getline(std::cin, str);
- str += str2;
- std::string space = " ";
- int numberofletter=0;
- int idx=0; //word end number
- for (; numberofletter != str.length();)
- {
-  idx = str.find(" ", numberofletter);
-  reverse(str, numberofletter, idx - 1);
-  numberofletter = idx + 1;
- }
- str.erase(str.length()-1, 1);
- reverse(str,0, str.length()-1);
- std::cout << str << std::endl;
- return 0;
-}
-void reverse(std::string &name, int a, int b) //reverse func(your string, start element, last element)
-{
- for (int i = a, j = b; i < j; i++, j--)
- {
-  std::swap(name[i], name[j]);
- }
+	std::string str;
+	getline(std::cin,str);
+
+	std::string buf;                 // Have a buffer string
+	std::stringstream ss(str);       // Insert the string into a stream
+	std::vector<std::string> tokens; // Create vector to hold our words
+
+	while (ss >> buf)
+		tokens.push_back(buf);
+	str.clear();
+	std::reverse(tokens.begin(), tokens.end());
+	for (int i = 0; i < tokens.size(); i++)
+	{
+		str += tokens[i];
+		str += " ";
+	}
+	std::cout << str;
+	return 0;
 }
