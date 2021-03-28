@@ -1,18 +1,21 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+void wordswap(std::string &);
 int main()
 {
 	std::string str;
-	char delim = ' ';
-
 	std::cout << "Input your line: ";
 	getline(std::cin, str);
-	std::string space = " ";
+	wordswap(str);
+	std::cout << str << std::endl;
+	return 0;
+}
+void wordswap(std::string &str)
+{
+	char delim = ' ';
 	std::reverse(str.begin(), str.end());
-	std::cout << str<<std::endl;
 
-	//int numberofletter = 0;
 	auto itFrom = begin(str);
 	auto itTo = std::find(begin(str), end(str), delim);
 	do
@@ -21,10 +24,6 @@ int main()
 		itTo++;
 		itFrom = itTo;
 		itTo = std::find(itTo, end(str), delim);
-		std::cout << str<<std::endl;
-	}
-	while(itTo != end(str));
+	} while (itTo != end(str));
 	std::reverse(itFrom, str.end());
-	std::cout << str << std::endl;
-	return 0;
 }
