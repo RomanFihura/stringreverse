@@ -1,26 +1,30 @@
-#include <vector>
-#include <string>
-#include <sstream>
 #include <iostream>
-
+#include <string>
+#include <algorithm>
 int main()
 {
 	std::string str;
-	getline(std::cin,str);
+	char delim = ' ';
 
-	std::string buf;                 // Have a buffer string
-	std::stringstream ss(str);       // Insert the string into a stream
-	std::vector<std::string> tokens; // Create vector to hold our words
+	std::cout << "Input your line: ";
+	getline(std::cin, str);
+	std::string space = " ";
+	std::reverse(str.begin(), str.end());
+	std::cout << str<<std::endl;
 
-	while (ss >> buf)
-		tokens.push_back(buf);
-	str.clear();
-	std::reverse(tokens.begin(), tokens.end());
-	for (int i = 0; i < tokens.size(); i++)
+	//int numberofletter = 0;
+	auto itFrom = begin(str);
+	auto itTo = std::find(begin(str), end(str), delim);
+	do
 	{
-		str += tokens[i];
-		str += " ";
+		std::reverse(itFrom, itTo);
+		itTo++;
+		itFrom = itTo;
+		itTo = std::find(itTo, end(str), delim);
+		std::cout << str<<std::endl;
 	}
-	std::cout << str;
+	while(itTo != end(str));
+	std::reverse(itFrom, str.end());
+	std::cout << str << std::endl;
 	return 0;
 }
