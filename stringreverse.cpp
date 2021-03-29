@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-void wordswap(std::string &);
+int wordswap(std::string &);
 int main()
 {
 	std::string str;
@@ -11,9 +11,15 @@ int main()
 	std::cout << str << std::endl;
 	return 0;
 }
-void wordswap(std::string &str)
+int wordswap(std::string &str)
 {
 	char delim = ' ';
+
+	if (auto F=end(str) ==(std::find(begin(str), end(str), delim)))
+	{
+		return 0;
+	}
+	
 	std::reverse(str.begin(), str.end());
 
 	auto itFrom = begin(str);
@@ -26,4 +32,5 @@ void wordswap(std::string &str)
 		itTo = std::find(itTo, end(str), delim);
 	} while (itTo != end(str));
 	std::reverse(itFrom, str.end());
+	return 0;
 }
